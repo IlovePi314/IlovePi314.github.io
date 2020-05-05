@@ -11,7 +11,7 @@ var level01 = function (window) {
 
         // this data will allow us to define all of the
         // behavior of our game
-       
+       //Types of things to use spike, sawblade enemy, reward. use x and y to change the objects coordinents (in blue)
         var levelData = {
             "name": "Robot Romp",
             "number": 1, 
