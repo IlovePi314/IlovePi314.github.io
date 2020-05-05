@@ -32,6 +32,8 @@ var level01 = function (window) {
                 { "type": "reward", "x": 1800, "y": groundY - 100},
             
             
+            /---add things above here--- /
+            
             ]
         };
          for (var i = 0; i < levelData.gameItems.length; i++) {
