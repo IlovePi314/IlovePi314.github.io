@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="bower_components/easeljs/lib/easeljs-0.8.1.min.js"></script>	
+	
 	<meta charset="utf-8">
 	<title>Bouncing Box</title>
 	<script src="jquery.min.js"></script>
 	<style>
+	
+	.hud {
+			width: 70px;
+			height: 10px;
+			background-color: gold;
+			font-size: 100%;
+			text-align: center;
+			display: block;
+			position: absolute;
+			top: 0px;
+			left: 0px;  /* <--- Change me! */
+		}
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: teal;
+			background-color: gold;
 			font-size: 300%;
 			text-align: center;
 			display: block;
 			position: absolute;
 			top: 100px;
-			left: 500px;  /* <--- Change me! */
+			left: 300px;  /* <--- Change me! */
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -23,16 +37,16 @@
 <body class="board">
 	<!-- HTML for the box -->
 	<div class="box">?</div>
-
+	<div class="hud">?</div>
 	<script>
 		(function(){
-			'use strict'
+			'use strict';
 			/* global jQuery */
 
 			//////////////////////////////////////////////////////////////////
 			/////////////////// SETUP DO NOT DELETE //////////////////////////
 			//////////////////////////////////////////////////////////////////
-			
+			var hud = jQuery('.hud');
 			var box = jQuery('.box');	// reference to the HTML .box element
 			var board = jQuery('.board');	// reference to the HTML .board element
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
@@ -43,7 +57,7 @@
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
 
-			// moves the Box to a new position on the screen along the X-Axis
+			// moves the Box to a new position on the screen along the X-Axis and Y-Axis
 			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
 				box.css("top", newPositionY);
@@ -53,17 +67,20 @@
 			function changeBoxText(newText) {
 				box.text(newText);
 			}
-
+			function changeHudText(newText) {
+				hud.text(newText);
+			}
 			//////////////////////////////////////////////////////////////////
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			var positionX = 0;
+			var randNum = Math.random() * 300;
+			var positionX = randNum;
 			var points = 0;
 			var speed = 10;
-			var positionY;
-			var speedY;
+			var positionY = randNum;
+			var speedY = 10;
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -71,15 +88,34 @@
 			turn it around! 
 			*/
 			function update() {
+			
 				positionX = positionX + speed;
+				positionY = positionY + speedY;
 				moveBoxTo(positionX, positionY);
+				if (positionX > boardWidth + 4){
+					positionX = positionX -20;
+				}
 				if (positionX > boardWidth) {
 					speed *= -1;
+				}
+				if (positionY > boardHeight + 4){
+					positionY = positionY -20;
+				}
+				
+				if (positionY > boardHeight ) {
+					speedY *= -1;
 				}
 				if (positionX < 0) {
 					speed *= -1;
 				}
-			};
+				
+				
+				if (positionY < 0) {
+					speedY *= -1;
+				}
+				
+				
+			}
 
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
@@ -87,13 +123,31 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX = 0;
+			var randNum = Math.random() * 900;
+				positionY = randNum;
+				positionX = randNum;
 				points = points + 1;
 				changeBoxText(points);
-				speed = speed + 4;
-				
-			};
-		})();
+				changeHudText("You have " + points + " points");
+				if (speed < 0) {
+					speed = speed - 1;
+				}
+				if (speed > 0) {
+					speed = speed + 1;
+				}
+				if (speedY < 0) {
+					speedY = speedY - 1;
+				}
+				if (speedY > 0) {
+					speedY = speedY + 1;
+				}
+			
+			if (points >= 50){
+				changeHudText("You have won" + " You have " + points + " GG " + "email me telling me of your win IlovePi3141@gmail.com is my email");
+			}
+		}
+		})();  
+		
 	</script>
 </body>
 </html>
