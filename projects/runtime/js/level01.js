@@ -29,10 +29,10 @@ var level01 = function (window) {
                 { "type": "enemy", "x": 1200, "y": groundY - 50},
                 { "type": "enemy", "x": 1400, "y": groundY - 100},
                 { "type": "enemy", "x": 1600, "y": groundY - 50},
-                { "type": "reward", "x": 1800, "y": groundY - 100},
+                { "type": "reward", "x": 1800, "y": groundY - 150},
+            /ex { "type"; "type of object goes here", "x"; x cordinate, "y" GroundY distance above ground ex note:negatives go up posatives go down/
             
-            
-            /---add things above here--- /
+            //---add things above here--- //
             
             ]
         };
