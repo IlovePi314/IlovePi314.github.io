@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="bower_components/easeljs/lib/easeljs-0.8.1.min.js"></script>	
+	
 	
 	<meta charset="utf-8">
 	<title>Bouncing Box</title>
 	<script src="jquery.min.js"></script>
 	<style>
+	body {
+		background-image: url("https:///IlovePi314.github.io/projects/bouncing-box/BouncingBoxbackground.png");
+        background-color: white;
+	}
+	.win {
+		width: 300px;
+		height: 200px;
+		color: gold;
+		background-color: white;
+		top: 325px;
+		left: 650px;
+		font-size: 390%;
+		position: fixed;
+	}
 	
 	.hud {
 			width: 70px;
@@ -36,6 +50,7 @@
 </head>
 <body class="board">
 	<!-- HTML for the box -->
+	<div class="win"></div>
 	<div class="box">?</div>
 	<div class="hud">?</div>
 	<script>
@@ -47,6 +62,7 @@
 			/////////////////// SETUP DO NOT DELETE //////////////////////////
 			//////////////////////////////////////////////////////////////////
 			var hud = jQuery('.hud');
+			var win = jQuery('.win');
 			var box = jQuery('.box');	// reference to the HTML .box element
 			var board = jQuery('.board');	// reference to the HTML .board element
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
@@ -70,17 +86,23 @@
 			function changeHudText(newText) {
 				hud.text(newText);
 			}
+			function changeWinText(newText) {
+				win.text(newText);
+			}
 			//////////////////////////////////////////////////////////////////
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			var randNum = Math.random() * 300;
+			var randNum = Math.random() * 600;
+			var randNum1 = Math.random() * 500;
+			var randNum2 = Math.random() * 10;
+			var randNum3 = Math.random() * 10;
 			var positionX = randNum;
 			var points = 0;
-			var speed = 10;
-			var positionY = randNum;
-			var speedY = 10;
+			var speed = randNum2;
+			var positionY = randNum1;
+			var speedY = randNum3;
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -124,28 +146,35 @@
 			*/
 			function handleBoxClick() {
 			var randNum = Math.random() * 900;
+			var randNum1 = Math.random() * 10;
+			var randNum2 = Math.random() * 10;	
 				positionY = randNum;
 				positionX = randNum;
 				points = points + 1;
 				changeBoxText(points);
 				changeHudText("You have " + points + " points");
 				if (speed < 0) {
-					speed = speed - 1;
+					speed = speed - 1 * randNum1 * (randNum2 / 10);
 				}
 				if (speed > 0) {
-					speed = speed + 1;
+					speed = speed + 1 * randNum1 * (randNum2 / 10);
 				}
 				if (speedY < 0) {
-					speedY = speedY - 1;
+					speedY = speedY - 1 * randNum2 * (randNum1 / 10);
 				}
 				if (speedY > 0) {
-					speedY = speedY + 1;
+					speedY = speedY + 1 * randNum2 * (randNum1 / 10) ;
 				}
 			
 			if (points >= 50){
+				
+				
 				changeHudText("You have won" + " You have " + points + " GG " + "email me telling me of your win IlovePi3141@gmail.com is my email");
+			    changeWinText(" You Win ");
+				
 			}
-		}
+				points = 49;
+			}
 		})();  
 		
 	</script>
