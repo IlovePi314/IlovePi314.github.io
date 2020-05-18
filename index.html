@@ -4,13 +4,7 @@
         <script src="jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title> Benjamin's Website </title>
-        <script>
-        (document).ready(function(){
-        ("button").click(function(){
-        ("p").toggle();
-  });
-});
-        </script>
+        
         <style>
     body {
         background: rgb(125, 198, 205);
@@ -73,6 +67,12 @@
     .interests header {
         font-size: 1.25em;
     }
+    .interests p {
+        font-size: 0.50em;
+    }
+    .hobbies p {
+        font-size: 0.50em;
+    }
     .hobbies header {
         font-size: 1.25em;
     }
@@ -99,7 +99,8 @@
                     </p>
                     <section class="interests">
                         <header>Interests</header>
-                        <ul>
+                        <p>(click me)</p>
+                        <ul id="interests">
                             <li>Band</li>
                             <li>Terraria</li>
                             <li>Bikeing</li>
@@ -107,7 +108,8 @@
                     </section>
                     <section class="hobbies">
                         <header>Hobbies</header>
-                        <ul>
+                        <p>(click me)</p>
+                        <ul id="hobbies">
                             <li>Soldering</li>
                             <li>Codeing</li>
                             <li>Memes</li>
@@ -118,4 +120,14 @@
             </main>
         </div>
     </body>
+    <script>
+        $(".interests").click(function(){
+            //$(".interests").toggle('fast');
+            $("#interests").slideToggle('fast');
+        });
+        $(".hobbies").click(function(){
+            //$(".interests").toggle('fast');
+            $("#hobbies").slideToggle('fast');
+        });
+    </script>
 </html>
