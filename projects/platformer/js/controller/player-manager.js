@@ -50,7 +50,7 @@
             } else {}
             
             //  Allow the player to jump if they are touching the ground.
-            if (cursors.up.isDown && asset.body.touching.down) {
+            if (cursors.up.isDown /*&& asset.body.touching.down*/) {
                 player.flyingJump();
             }
         }

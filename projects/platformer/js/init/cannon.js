@@ -27,10 +27,11 @@
         // ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
         
         // example: 
-       createCannon("top", 190, 2000);
-        createCannon("left", 200);
+        createCannon("top", 310, 2000);
+        createCannon("top", 580, 2000);
+        createCannon("left", 125);
         createCannon("right", 650, 10000);
-        // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
+        ////// ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
     };
     cannon.init = init;

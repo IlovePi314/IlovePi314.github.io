@@ -123,7 +123,7 @@
         function createFlyingJumpState(name) {
             let 
                 xOffset = 17,
-                yOffset = 9,
+                yOffset = 10,
                 state = createState(name);
                 state.fire = state.duck = state.idle = state.walk = state.run = 
                 state.stop = state.duck = state.jump = state.flyingJump = doNothing;
@@ -132,7 +132,7 @@
                 asset.body.bounce.y = 0;
                 game.add.tween(asset.body).to( { y: asset.body.y -100 }, 1000, Phaser.Easing.Linear.None, true);
 
-                asset.body.velocity.x = 200 * _direction;
+                asset.body.velocity.x = 175 * _direction;
                 asset.x += xOffset * _direction;
                 asset.y += yOffset;
             };
@@ -319,8 +319,8 @@
         game.physics.arcade.enable(asset);
     
         //  Player physics properties. Give the little guy a slight bounce.
-        asset.body.bounce.y = 0.4;
-        asset.body.gravity.y = 900;
+        asset.body.bounce.y = 0.5;
+        asset.body.gravity.y = 500;
         // {"w":69,"h":107}
         asset.body.setSize(22, 95, 0, -3);
         asset.body.collideWorldBounds = true;
