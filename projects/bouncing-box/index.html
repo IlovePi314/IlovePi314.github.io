@@ -159,16 +159,28 @@
 				if (speed < 0) {
 					speed = speed - 1 * randNum1 * (randNum2 / 10);
 				}
-				if (speed > 0) {
+				 if (speed > 0) {
 					speed = speed + 1 * randNum1 * (randNum2 / 10);
 				}
-				if (speedY < 0) {
+				 if (speedY < 0) {
 					speedY = speedY - 1 * randNum2 * (randNum1 / 10);
 				}
-				if (speedY > 0) {
+				 if (speedY > 0) {
 					speedY = speedY + 1 * randNum2 * (randNum1 / 10) ;
 				}
-			
+				if (speed > 19 && speed < 22) {
+					speed = -22;
+				}
+				if (speed < -19 && speed > -22) {
+					speed = 22;
+				}
+				if (speedY > 19 && speedY < 22) {
+					speedY = -22;
+				}
+				if (speedY < -19 && speed > -22) {
+					speedY = 22;
+				}
+				
 			if (points >= 50){
 				
 				
