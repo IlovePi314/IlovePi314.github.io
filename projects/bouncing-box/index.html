@@ -157,19 +157,7 @@
 				points = points + 1;
 				changeBoxText(points);
 				changeHudText("You have " + points + " points");
-				if (speed > 19 && speed < 22) {
-					speed = -22;
-				}
-				else if (speed < -19 && speed > -22) {
-					speed = 22;
-				}
-				else if (speedY > 19 && speedY < 22) {
-					speedY = -22;
-				}
-				else  if (speedY < -19 && speed > -22) {
-					speedY = 22;
-				}
-				else if (speed < 0) {
+				 if (speed < 0) {
 					speed = speed - 1 * randNum1 * (randNum2 / 10);
 				}
 				 else if (speed > 0) {
@@ -178,9 +166,22 @@
 				 else if (speedY < 0) {
 					speedY = speedY - 1 * randNum2 * (randNum1 / 10);
 				}
-				  else if (speedY > 0) {
+				 else if (speedY > 0) {
 					speedY = speedY + 1 * randNum2 * (randNum1 / 10) ;
 				}
+				 if (speed > 19 && speed < 22) {
+					speed = -22;
+				}
+				 if (speed < -19 && speed > -22) {
+					speed = 22;
+				}
+				  if (speedY > 19 && speedY < 22) {
+					speedY = -22;
+				}
+				 if (speedY < -19 && speed > -22) {
+					speedY = 22;
+				}
+				
 				
 				
 			if (points >= 50){
