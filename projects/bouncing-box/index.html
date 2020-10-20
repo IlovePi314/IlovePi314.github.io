@@ -150,24 +150,13 @@
 			function handleBoxClick() {
 			var randNum = Math.random() * 900;
 			var randNum1 = Math.random() * 10;
-			var randNum2 = Math.random() * 10;	
+			var randNum2 = Math.random() * 10;
+			var randNum3 = Maath.random() * 900;
 				positionY = randNum;
-				positionX = randNum;
+				positionX = randNum3;
 				points = points + 1;
 				changeBoxText(points);
 				changeHudText("You have " + points + " points");
-				if (speed < 0) {
-					speed = speed - 1 * randNum1 * (randNum2 / 10);
-				}
-				 if (speed > 0) {
-					speed = speed + 1 * randNum1 * (randNum2 / 10);
-				}
-				 if (speedY < 0) {
-					speedY = speedY - 1 * randNum2 * (randNum1 / 10);
-				}
-				 if (speedY > 0) {
-					speedY = speedY + 1 * randNum2 * (randNum1 / 10) ;
-				}
 				if (speed > 19 && speed < 22) {
 					speed = -22;
 				}
@@ -180,6 +169,19 @@
 				if (speedY < -19 && speed > -22) {
 					speedY = 22;
 				}
+				if (speed < 0) {
+					speed = speed - 1 * randNum1 * (randNum2 / 10);
+				}
+				 if (speed > 0) {
+					speed = speed + 1 * randNum1 * (randNum2 / 10);
+				}
+				 if (speedY < 0) {
+					speedY = speedY - 1 * randNum2 * (randNum1 / 10);
+				}
+				 if (speedY > 0) {
+					speedY = speedY + 1 * randNum2 * (randNum1 / 10) ;
+				}
+				
 				
 			if (points >= 50){
 				
