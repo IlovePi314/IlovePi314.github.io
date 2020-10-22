@@ -152,6 +152,8 @@
 			var randNum1 = Math.random() * 10;
 			var randNum2 = Math.random() * 10;
 			var randNum3 = Math.random() * 900;
+			var randNum4 = Math.random() * 10;
+			var randNum5 = Math.random() * 10:
 				positionY = randNum;
 				positionX = randNum3;
 				points = points + 1;
@@ -167,19 +169,10 @@
 					speedY = speedY - 1 * randNum2 * (randNum1 / 10);
 				}
 				 if (speedY > 0) {
-					speedY = speedY + 1 * randNum2 * (randNum1 / 10) ;
+					speedY = speedY + 1 * randNum2 * (randNum1 / 10);
 				}
-				 if (speed > 19 && speed < 22) {
-					speed = -22;
-				}
-				 if (speed < -19 && speed > -22) {
-					speed = 22;
-				}
-				  if (speedY > 19 && speedY < 22) {
-					speedY = -22;
-				}
-				 if (speedY < -19 && speed > -22) {
-					speedY = 22;
+				if (randNum4 < 3) {
+					speed *= -1;
 				}
 				
 				
