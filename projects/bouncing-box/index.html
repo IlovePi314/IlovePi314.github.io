@@ -74,7 +74,7 @@
 			setInterval(update, 50);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
-			box.on('click', handleBoxClick);
+			box.on('mousedown', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis and Y-Axis
 			function moveBoxTo(newPositionX, newPositionY) {
