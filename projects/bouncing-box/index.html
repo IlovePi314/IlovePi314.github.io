@@ -71,7 +71,7 @@
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 			var boardHeight = jQuery(window).height(); // y top coordinant 
 			// Every 50 milliseconds, call the update Function (see below)
-			setInterval(update, 50);
+			setInterval(update, 60);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('mousedown', handleBoxClick);
@@ -147,6 +147,7 @@
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
+			//Handles when box is clicked and makes new random numbers
 			function handleBoxClick() {
 			var randNum = Math.random() * 900;
 			var randNum1 = Math.random() * 10;
@@ -180,13 +181,15 @@
 					speedY *= -1;
 				}
 				
-				
+			//conditionials for winning and nice things		
 			if (points === 69) {
 				changeHudText("Nice")
 			}
 			if (points >= 50){
-				changeHudText("You have won" + " You have " + points + " GG " + " ");
-			    changeWinText(" You Win ");				
+				changeHudText("You have won" + " You have " + points + " points " + "GG");
+			    changeWinText(" You Win ");	
+				
+				
 				}
 			}
 		})();  
