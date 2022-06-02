@@ -71,7 +71,7 @@
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 			var boardHeight = jQuery(window).height(); // y top coordinant 
 			// Every 50 milliseconds, call the update Function (see below)
-			setInterval(update, 60);
+			setInterval(update, 50);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('mousedown', handleBoxClick);
@@ -96,9 +96,9 @@
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
-			// TODO 2 - Variable declarations 
-			var randNum = Math.random() * 600;
-			var randNum1 = Math.random() * 500;
+			// TODO 2 - Variable declarations 600/500
+			var randNum = Math.random() * boardWidth - 1;
+			var randNum1 = Math.random() * boardHeight - 1;
 			var randNum2 = Math.random() * 10;
 			var randNum3 = Math.random() * 10;
 			var positionX = randNum;
