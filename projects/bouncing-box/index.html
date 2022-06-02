@@ -27,7 +27,7 @@
 	
 	.hud {
 			width: 70px;
-			height: 10px;
+			height: 40px;
 			background-color: gold;
 			font-size: 100%;
 			text-align: center;
@@ -96,9 +96,9 @@
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
-			// TODO 2 - Variable declarations 
-			var randNum = Math.random() * 600;
-			var randNum1 = Math.random() * 500;
+			// TODO 2 - Variable declarations 600/500
+			var randNum = Math.random() * boardWidth - 1;
+			var randNum1 = Math.random() * boardHeight - 1;
 			var randNum2 = Math.random() * 10;
 			var randNum3 = Math.random() * 10;
 			var positionX = randNum;
@@ -147,6 +147,7 @@
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
+			//Handles when box is clicked and makes new random numbers
 			function handleBoxClick() {
 			var randNum = Math.random() * 900;
 			var randNum1 = Math.random() * 10;
@@ -154,6 +155,8 @@
 			var randNum3 = Math.random() * 900;
 			var randNum4 = Math.random() * 10;
 			var randNum5 = Math.random() * 10;
+			var randNum6 = Math.random() * 10;
+			var randNum7 = Math.random() * 10;
 				positionY = randNum;
 				positionX = randNum3;
 				points = points + 1;
@@ -166,28 +169,28 @@
 					speed = speed + 1 * randNum1 * (randNum2 / 10);
 				}
 				 if (speedY < 0) {
-					speedY = speedY - 1 * randNum2 * (randNum1 / 10);
+					speedY = speedY - 1 * randNum6 * (randNum7 / 10);
 				}
 				 if (speedY > 0) {
-					speedY = speedY + 1 * randNum2 * (randNum1 / 10);
+					speedY = speedY + 1 * randNum6 * (randNum7 / 10);
 				}
-				if (randNum4 < 3) {
+				if (randNum4 <= 4) {
 					speed *= -1;
 				}
-				if (randNum5 < 3) {
+				if (randNum5 <= 4) {
 					speedY *= -1;
 				}
 				
-				
-				
-			if (points >= 50){
-				
-				
-				changeHudText("You have won" + " You have " + points + " GG " + "email me telling me of your win Benjamin3141@gmail.com is my email");
-			    changeWinText(" You Win ");
-				
+			//conditionials for winning and nice things		
+			if (points === 69) {
+				changeHudText("Nice")
 			}
-			
+			if (points >= 50){
+				changeHudText("You have won" + " You have " + points + " points " + "GG");
+			    changeWinText(" You Win ");	
+				
+				
+				}
 			}
 		})();  
 		
