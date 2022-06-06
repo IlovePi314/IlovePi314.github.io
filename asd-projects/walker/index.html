@@ -10,9 +10,16 @@
     <script src="index.js"></script>
   </head>
   
-  <body>
+  <body class="board">
     <div id='board'>
-      <div id='gameItem'></div>
+      <div class='walker'></div>
+      <div class='walker'></div>
     </div>
+    <div id="info" style="width:50px; height:40px; top:1000px; color:white;"></div>
   </body>
+   <!--Using Jquery to change board size depending on window size of when its loaded-->
+   <script>
+    $("#board").css("width", $(".board").width() - 1);
+    $("#board").css("height", $(window).height() - 16);
+  </script>
 </html>
