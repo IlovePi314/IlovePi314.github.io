@@ -12,6 +12,7 @@ function runProgram(){
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   var boardHeight = $(".board").width() - 1;
   var boardWidth = $(window).height() - 16;
+  //object for all key presses needed for both players
   var key = {
     "DOWN": 40,
     "UP": 38,
@@ -22,6 +23,17 @@ function runProgram(){
     "S": 83,
     "D": 68
   }
+  //Player Variables//
+  //PLAYER 1//
+  var positionX = 0
+  var positionY = 0
+  var speedX = 0
+  var speedY = 0
+  //PLAYER 2//
+  var positionX2 = 0
+  var positionY2 = 0
+  var speedX2 = 0
+  var speedY2 = 0
 
 
 
@@ -42,7 +54,8 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
+    repositionWalker();
+    redrawWalker();
 
   }
   
@@ -66,6 +79,20 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+
+  function repositionWalker() {
+    positionX += speedX;
+    positionX2 += speedX2;
+    positionY += speedY;
+    positionY2 += speedY2
+  }
+  function redrawWalker() {
+    $("p1").css("left", positionX);
+    $("p1").css("top", positionY);
+    $("p2").css("left", positionX2);
+    $("p2").css("top", positionY2);
+  }
+
 
   
   function endGame() {
