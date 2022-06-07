@@ -17,6 +17,6 @@ body {
   height: 50px;
   border-radius: 50px;
   position: absolute;
-   left: 100px;   /* Starting position of player  */
-   top: 100px;   /* Starting position of player  */
+   /*left: 100px;   /* Starting position of player  */
+   /*top: 100px;   /* Starting position of player  */
 }

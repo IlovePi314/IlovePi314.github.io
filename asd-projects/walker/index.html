@@ -12,8 +12,8 @@
   
   <body class="board">
     <div id='board'>
-      <div class='walker', id="p1"></div>
-      <div class='walker', id="p2"></div>
+      <div class='walker' id="p1"></div>
+      <div class='walker' id="p2"></div>
     </div>
     <div id="info" style="width:50px; height:40px; top:1000px; color:white;"></div>
   </body>
@@ -21,7 +21,6 @@
    <script>
     $("#board").css("width", $(".board").width() - 1);
     $("#board").css("height", $(window).height() - 16);
-    $('.walker').css("top",$(window).height() / 2);
-    $('#p2').css('left', $(".board").width() - 150).css('background-color', 'red');
+    $('#p2').css('background-color', 'red');
   </script>
 </html>
