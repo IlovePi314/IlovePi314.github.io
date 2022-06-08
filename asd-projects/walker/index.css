@@ -17,6 +17,25 @@ body {
   height: 50px;
   border-radius: 50px;
   position: absolute;
-   /*left: 100px;   /* Starting position of player  */
-   /*top: 100px;   /* Starting position of player  */
+}
+
+#start1 {
+  width: 150px;
+  height: 100px;
+  position: absolute;
+  top: 275px;
+  left: 90px;
+  color: whitesmoke;
+  font-style: bold;
+  font-size:xx-large;
+}
+#start2 {
+  width: 150px;
+  height: 100px;
+  position: absolute;
+  top: 275px;
+  left: 90px;
+  color: whitesmoke;
+  font-style: bold;
+  font-size:xx-large;
 }

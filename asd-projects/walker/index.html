@@ -16,11 +16,16 @@
       <div class='walker' id="p2"></div>
     </div>
     <div id="info" style="width:50px; height:40px; top:1000px; color:white;"></div>
+    <div id="start1">Player 1</div>
+    <div id="start2">Player 2</div> 
   </body>
    <!--Using Jquery to change board size depending on window size of when its loaded-->
    <script>
     $("#board").css("width", $(".board").width() - 1);
     $("#board").css("height", $(window).height() - 16);
+    //player 2 color change to differentiate them
     $('#p2').css('background-color', 'red');
+    
+    
   </script>
 </html>

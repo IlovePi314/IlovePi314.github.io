@@ -34,12 +34,18 @@ function runProgram() {
   var positionY2 = $(window).height() / 2;
   var speedX2 = 0
   var speedY2 = 0
+  //with Math.celi could rarely give 0
+  var rng = Math.floor(Math.random() * 2) + 1
 
-
+  /*
+ player identifications will remain in same place
+  relatives to the players regardless of resolution
+*/
+  $('#start1').css('left', positionX - 10);
+  $('#start2').css('left', positionX2 - 10);
+  $('#start1').css('top', positionY - 35)
 
   $("#info").text(`${boardHeight} ${boardWidth}`)
-  // Game Item Objects    remember to add an id for player 1 and player 2
-
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -55,12 +61,44 @@ function runProgram() {
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    /*if (positionY < boardHeight - 55 || positionY > 5){
-      speedY = 
+    //code for tag
+    
+
+    //keeps P1 within playing field//
+    if (positionY > boardHeight - 50) {
+      speedY = 0;
+      positionY -= 1;
     }
-    if (positionX)
-    if (positionY2)
-    if (positionX2)*/
+    if (positionY < 0) {
+      speedY = 0;
+      positionY += 1;
+    }
+    if (positionX > boardWidth - 50) {
+      speedX = 0;
+      positionX -= 1;
+    }
+    if (positionX < 0) {
+      speedX = 0;
+      positionX += 1;
+    }
+    //keeps P2 in playing field//
+    if (positionY2 > boardHeight - 50) {
+      speedY2 = 0;
+      positionY2 -= 1;
+    }
+    if (positionY2 < 0) {
+      speedY2 = 0;
+      positionY2 += 1;
+    }
+    if (positionX2 > boardWidth - 50) {
+      speedX2 = 0;
+      positionX2 -= 1;
+    }
+    if (positionX2 < 0) {
+      speedX2 = 0;
+      positionX2 += 1;
+    }
+    //calling the functions the reposition the walker as well as the css for them//
     repositionWalker();
     redrawWalker();
   }
@@ -69,16 +107,16 @@ function runProgram() {
   Called in response to events.
   */
   function handleKeyDown(event) {
-    if (event.which === key.DOWN && positionY < boardHeight - 55) {
+    if (event.which === key.DOWN && positionY < boardHeight - 56) {
       speedY = 5;
     }
-    if (event.which === key.LEFT && positionX > 5) {
+    if (event.which === key.LEFT && positionX > 0) {
       speedX = -5;
     }
-    if (event.which === key.RIGHT && positionX < boardWidth - 55) {
+    if (event.which === key.RIGHT && positionX < boardWidth - 50) {
       speedX = 5
     }
-    if (event.which === key.UP && positionY > 55) {
+    if (event.which === key.UP && positionY > 1) {
       speedY = -5;
     }
     if (event.which === key.S && positionY2 < boardHeight - 55) {
@@ -90,7 +128,7 @@ function runProgram() {
     if (event.which === key.D && positionX2 < boardWidth - 55) {
       speedX2 = 5
     }
-    if (event.which === key.W && positionY2 > 55) {
+    if (event.which === key.W && positionY2 > 6) {
       speedY2 = -5;
     }
   }
