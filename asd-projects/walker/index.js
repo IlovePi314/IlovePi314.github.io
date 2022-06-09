@@ -34,9 +34,26 @@ function runProgram() {
   var positionY2 = $(window).height() / 2;
   var speedX2 = 0
   var speedY2 = 0
-  //with Math.celi could rarely give 0
-  var rng = Math.floor(Math.random() * 2) + 1
 
+  // flag
+  var paused = false;
+ 
+  /////////////////////////////////////////////////
+  ////logic for restart and selecting who is it////
+  /////////////////////////////////////////////////
+      //with Math.celi could rarely give 0//
+   var rng = Math.floor(Math.random() * 2) + 1
+
+  if (rng === 1){
+    $("#whoit").text("(☞ﾟヮﾟ)☞  Player 1 is it  ☜(ﾟヮﾟ☜)")
+    var it = 1
+  }
+  if (rng === 2){
+    $("#whoit").text("(☞ﾟヮﾟ)☞  Player 2 is it  ☜(ﾟヮﾟ☜)")
+    var it = 2
+  }
+  $("#whoit").css("top", ($(window).height() / 2) - 200)
+  $("#whoit").css('left', ($('.board').width() / 2) - 250)
   /*
  player identifications will remain in same place
   relatives to the players regardless of resolution
@@ -44,25 +61,42 @@ function runProgram() {
   $('#start1').css('left', positionX - 10);
   $('#start2').css('left', positionX2 - 10);
   $('#start1').css('top', positionY - 35)
-
+//positions of other things
   $("#info").text(`${boardHeight} ${boardWidth}`)
-
+  
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyUp);
-
+ // $(document).on('keydown', )
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  // if (badRange > Math.sqrt(Math.sqr(positionX1 - positionX2) + Math.sqr(positionY1 - positionY2)))
   /* 
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    //code for tag
+    //code for tag when the player thats it touches the other
+    var centerP1X = positionX + (55 / 2);
+    var centerP1Y = positionY +(55 / 2);
+    var centerP2X = positionX2 + (55 / 2);
+    var centerP2Y = positionY2 + (55 / 2);
     
+    if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2))) {
+      $("#whoit").show();
+      $("#whoit").css("left", ($(".board").width() / 2) - 100)
+      $("#whoit").text("Player " + it + " wins");
+      
+      if (!paused){
+        speedX2 = speedX = speedY2 = speedY = 0;
+        clearInterval(interval);
+        setTimeout(5000, resume);
+        paused = true;
+      }
+    }
 
     //keeps P1 within playing field//
     if (positionY > boardHeight - 50) {
@@ -107,6 +141,10 @@ function runProgram() {
   Called in response to events.
   */
   function handleKeyDown(event) {
+    if (!paused){
+    $("#whoit").hide()
+    $("#start1").hide()
+    $("#start2").hide()
     if (event.which === key.DOWN && positionY < boardHeight - 56) {
       speedY = 5;
     }
@@ -131,6 +169,7 @@ function runProgram() {
     if (event.which === key.W && positionY2 > 6) {
       speedY2 = -5;
     }
+  }
   }
 
   function handleKeyUp(event) {
@@ -193,4 +232,18 @@ function runProgram() {
     $(document).off();
   }
 
+  function resume(){
+    interval = setInterval(FRAMES_PER_SECOND_INTERVAL, newFrame);
+    setTimeout(1000, unpause);
+    pause = false;
+  }
+
+  function unpause(){
+    positionX2 = - 60
+    positionX = -30
+    paused = false;
+  }
+
 }
+
+
