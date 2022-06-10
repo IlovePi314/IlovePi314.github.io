@@ -7,11 +7,27 @@ function runProgram() {
   //////////////////////////// SETUP /////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+$("#competative").css("top", ($(window).height() / 2))
+$("#competative").css("left", ($(".board").width() / 2 - 150))
+
+
+
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   var boardWidth = $(".board").width() - 1;
   var boardHeight = $(window).height() - 16;
+   //Player Variables//
+  //PLAYER 1//
+  var positionX = 100;
+  var positionY = $(window).height() / 2;
+  var speedX = 0
+  var speedY = 0
+  //PLAYER 2//
+  var positionX2 = $(".board").width() - 150;
+  var positionY2 = $(window).height() / 2;
+  var speedX2 = 0
+  var speedY2 = 0
   //object for all key presses needed for both players
   var key = {
     "DOWN": 40,
@@ -23,20 +39,11 @@ function runProgram() {
     "S": 83,
     "D": 68
   }
-  //Player Variables//
-  //PLAYER 1//
-  var positionX = 100;
-  var positionY = $(window).height() / 2;
-  var speedX = 0
-  var speedY = 0
-  //PLAYER 2//
-  var positionX2 = $(".board").width() - 150;
-  var positionY2 = $(window).height() / 2;
-  var speedX2 = 0
-  var speedY2 = 0
+ 
 
   // flag
   var paused = false;
+  var it;
  
   /////////////////////////////////////////////////
   ////logic for restart and selecting who is it////
@@ -46,11 +53,11 @@ function runProgram() {
 
   if (rng === 1){
     $("#whoit").text("(☞ﾟヮﾟ)☞  Player 1 is it  ☜(ﾟヮﾟ☜)")
-    var it = 1
+    it = 1
   }
   if (rng === 2){
     $("#whoit").text("(☞ﾟヮﾟ)☞  Player 2 is it  ☜(ﾟヮﾟ☜)")
-    var it = 2
+    it = 2
   }
   $("#whoit").css("top", ($(window).height() / 2) - 200)
   $("#whoit").css('left', ($('.board').width() / 2) - 250)
@@ -93,7 +100,7 @@ function runProgram() {
       if (!paused){
         speedX2 = speedX = speedY2 = speedY = 0;
         clearInterval(interval);
-        setTimeout(5000, resume);
+        setTimeout(resume, 5000);
         paused = true;
       }
     }
@@ -233,16 +240,33 @@ function runProgram() {
   }
 
   function resume(){
-    interval = setInterval(FRAMES_PER_SECOND_INTERVAL, newFrame);
-    setTimeout(1000, unpause);
-    pause = false;
+    interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
+    setTimeout(restart, 1000);
   }
 
-  function unpause(){
-    positionX2 = - 60
-    positionX = -30
+  function restart(){
+    positionX2 = $(".board").width() - 150;
+    positionX = 100
+    positionY = $(window).height() / 2;
+    positionY2 = $(window).height() / 2;
+    var rng = Math.floor(Math.random() * 2) + 1
+
+    if (rng === 1){
+      $("#whoit").text("(☞ﾟヮﾟ)☞  Player 1 is it  ☜(ﾟヮﾟ☜)")
+      it = 1
+    }
+    if (rng === 2){
+      $("#whoit").text("(☞ﾟヮﾟ)☞  Player 2 is it  ☜(ﾟヮﾟ☜)")
+      it = 2
+    }
+    
+    $("#whoit").css("top", ($(window).height() / 2) - 200)
+    $("#whoit").css('left', ($('.board').width() / 2) - 250)
+    
     paused = false;
+
   }
+  //helper helper function//
 
 }
 

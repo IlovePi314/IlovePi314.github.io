@@ -47,3 +47,27 @@ body {
   font-style: bold;
   position: absolute;
 }
+#classic {
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  background-color: violet;
+  border: rgb(236, 236, 236);
+  box-shadow: violet 2px 2px, violet -2px 2px, violet 2px -2px, violet -2px -2px;
+  vertical-align: middle;
+  padding: 1px;
+  font-style: bold;
+  padding-left: 20px;
+  padding-right: 1px;
+}
+#competative {
+  width: 111px;
+  height: 20px;
+  position: absolute;
+  background-color: #00BB2D;
+  border: rgb(236, 236, 236) 1px solid;
+  box-shadow: #00BB2D 2px 2px, #00BB2D -2px 2px, #00BB2D 2px -2px, #00BB2D -2px -2px;
+  vertical-align: middle;
+  padding: 1px;
+  font-style: bold;
+}
