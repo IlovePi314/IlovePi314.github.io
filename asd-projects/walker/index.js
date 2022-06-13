@@ -7,9 +7,10 @@ function runProgram() {
   //////////////////////////// SETUP /////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-$("#competative").css("top", ($(window).height() / 2))
-$("#competative").css("left", ($(".board").width() / 2 - 150))
-
+$("#competitive").css("top", ($(window).height() / 2));
+$("#competitive").css("left", ($(".board").width() / 2 - 150));
+$("#classic").css("left", ($(".board").width() / 2 + 25));
+$("#classic").css("top", ($(window).height() / 2));
 
 
   // Constant Variables
@@ -41,21 +42,27 @@ $("#competative").css("left", ($(".board").width() / 2 - 150))
   }
  
 
-  // flag
-  var paused = false;
+  // flag and misc
+  var paused = true;
   var it;
- 
+  //mode is set to competative so it shows who is it before a mode is selected//
+  var mode = "competative";
+/////setup mode////
+$("#competitive").on("click", competitiveSelect);
+$("#classic").on("click", classicSelect);
+
+
   /////////////////////////////////////////////////
   ////logic for restart and selecting who is it////
   /////////////////////////////////////////////////
       //with Math.celi could rarely give 0//
    var rng = Math.floor(Math.random() * 2) + 1
 
-  if (rng === 1){
+  if (rng === 1 && mode === "competative"){
     $("#whoit").text("(☞ﾟヮﾟ)☞  Player 1 is it  ☜(ﾟヮﾟ☜)")
     it = 1
   }
-  if (rng === 2){
+  if (rng === 2 && mode === "competative"){
     $("#whoit").text("(☞ﾟヮﾟ)☞  Player 2 is it  ☜(ﾟヮﾟ☜)")
     it = 2
   }
@@ -72,9 +79,11 @@ $("#competative").css("left", ($(".board").width() / 2 - 150))
   $("#info").text(`${boardHeight} ${boardWidth}`)
   
   // one-time setup
+if (paused != false) {  
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyUp);
+}
  // $(document).on('keydown', )
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -85,6 +94,7 @@ $("#competative").css("left", ($(".board").width() / 2 - 150))
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
+ //if (paused === false) {
   function newFrame() {
     //code for tag when the player thats it touches the other
     var centerP1X = positionX + (55 / 2);
@@ -92,15 +102,32 @@ $("#competative").css("left", ($(".board").width() / 2 - 150))
     var centerP2X = positionX2 + (55 / 2);
     var centerP2Y = positionY2 + (55 / 2);
     
-    if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2))) {
+    //code for classic mode
+    if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2)) && mode === "classic") {
+        
+      if (it === 1) {
+        it = 2
+        $("#whoit").show();
+        $("#whoit").text("Player " + it + " is it");
+        $("#whoit").css("left", ($(".board").width() / 2) - 100)
+      }
+      if (it === 2) {
+        it = 1
+        $("#whoit").show();
+        $("#whoit").text("Player " + it + " is it");
+        $("#whoit").css("left", ($(".board").width() / 2) - 100)
+      }
+    }
+    //code oor competative mode\\
+    if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2)) && mode === "competitive") {
       $("#whoit").show();
       $("#whoit").css("left", ($(".board").width() / 2) - 100)
       $("#whoit").text("Player " + it + " wins");
-      
+      //setInterval()
       if (!paused){
         speedX2 = speedX = speedY2 = speedY = 0;
         clearInterval(interval);
-        setTimeout(resume, 5000);
+        setTimeout(resume, 4000);
         paused = true;
       }
     }
@@ -143,13 +170,16 @@ $("#competative").css("left", ($(".board").width() / 2 - 150))
     repositionWalker();
     redrawWalker();
   }
-
+ //}
+/////////////
   /* 
   Called in response to events.
   */
   function handleKeyDown(event) {
     if (!paused){
+      if (mode === "competitive"){
     $("#whoit").hide()
+      }
     $("#start1").hide()
     $("#start2").hide()
     if (event.which === key.DOWN && positionY < boardHeight - 56) {
@@ -266,7 +296,18 @@ $("#competative").css("left", ($(".board").width() / 2 - 150))
     paused = false;
 
   }
-  //helper helper function//
+  //mode select helper functions
+  function competitiveSelect() {
+    mode = "competitive"
+    $("p").hide();
+    paused = false
+  } 
+  function classicSelect() {
+    mode = "classic"
+    $("p").hide();
+    paused = false
+  }
+  
 
 }
 
