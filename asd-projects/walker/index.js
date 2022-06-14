@@ -52,11 +52,11 @@ function runProgram() {
     }
 
   ]
- players[0].x = 100;
- players[0].y = $(window).height() / 2;
+  players[0].x = 100;
+  players[0].y = $(window).height() / 2;
   //PLAYER 2//
-   players[1].x = $(".board").width() - 150;
-   players[1].y = $(window).height() / 2;
+  players[1].x = $(".board").width() - 150;
+  players[1].y = $(window).height() / 2;
   //object for all key presses needed for both players
   var key = {
     "DOWN": 40,
@@ -158,7 +158,7 @@ function runProgram() {
           $("#whoit").css("left", ($(".board").width() / 2) - 100)
         }
         goodToTag = false;
-        setTimeout(()=>{goodToTag = true;}, 2000);
+        setTimeout(() => { goodToTag = true; }, 2000);
       }
     }
     /////////////////////////////
@@ -232,7 +232,7 @@ function runProgram() {
       $("#start1").hide()
       $("#start2").hide()
       if (event.which === key.DOWN && players[0].y < boardHeight - 56) {
-        playes[0].speedY = 5;
+        players[0].speedY = 5;
       }
       if (event.which === key.LEFT && players[0].x > 0) {
         players[0].speedX = -5;
@@ -240,48 +240,48 @@ function runProgram() {
       if (event.which === key.RIGHT && players[0].x < boardWidth - 50) {
         players[0].speedX = 5
       }
-      if (event.which === key.UP && positionY > 1) {
-        speedY = -5;
+      if (event.which === key.UP && players[0].y > 1) {
+        players[0].speedY = -5;
       }
-      if (event.which === key.S && positionY2 < boardHeight - 55) {
-        speedY2 = 5;
+      if (event.which === key.S && players[1].y < boardHeight - 55) {
+        players[1].speedY = 5;
       }
-      if (event.which === key.A && positionX2 > 5) {
-        speedX2 = -5;
+      if (event.which === key.A && players[1].x > 5) {
+        players[1].speedX = -5;
       }
-      if (event.which === key.D && positionX2 < boardWidth - 55) {
-        speedX2 = 5
+      if (event.which === key.D && players[1].x < boardWidth - 55) {
+        players[1].speedX = 5
       }
-      if (event.which === key.W && positionY2 > 6) {
-        speedY2 = -5;
+      if (event.which === key.W && players[1].y > 6) {
+        players[1].speedY = -5;
       }
     }
   }
 
   function handleKeyUp(event) {
     if (event.which === key.DOWN) {
-      speedY = 0;
+      players[0].speedY = 0;
     }
     if (event.which === key.LEFT) {
-      speedX = -0;
+      players[0].speedX = -0;
     }
     if (event.which === key.RIGHT) {
-      speedX = 0
+      players[0].speedX = 0
     }
     if (event.which === key.UP) {
-      speedY = -0;
+      players[0].speedY = -0;
     }
     if (event.which === key.S) {
-      speedY2 = 0;
+      players[1].speedY = 0;
     }
     if (event.which === key.A) {
-      speedX2 = -0;
+      players[1].speedX = -0;
     }
     if (event.which === key.D) {
-      speedX2 = 0
+      players[1].speedX = 0
     }
     if (event.which === key.W) {
-      speedY2 = -0;
+      players[1].speedY = -0;
     }
   }
 
@@ -296,16 +296,16 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
 
   function repositionWalker() {
-    positionX += speedX;
-    positionX2 += speedX2;
-    positionY += speedY;
-    positionY2 += speedY2
+    players[0].x += players[0].speedX;
+    players[1].x += players[1].speedX;
+    players[0].y += players[0].speedY;
+    players[1].y += players[1].speedY;
   }
   function redrawWalker() {
-    $("#p1").css("left", positionX);
-    $("#p1").css("top", positionY);
-    $("#p2").css("left", positionX2);
-    $("#p2").css("top", positionY2);
+    $("#p1").css("left", players[0].x);
+    $("#p1").css("top", players[0].y);
+    $("#p2").css("left", players[1].x);
+    $("#p2").css("top", players[1].y);
   }
 
 
@@ -324,10 +324,10 @@ function runProgram() {
   }
 
   function restart() {
-    positionX2 = $(".board").width() - 150;
-    positionX = 100
-    positionY = $(window).height() / 2;
-    positionY2 = $(window).height() / 2;
+    players[1].x = $(".board").width() - 150;
+    players[0].x = 100
+    players[0].y = $(window).height() / 2;
+    players[1].y = $(window).height() / 2;
     var rng = Math.floor(Math.random() * 2) + 1
 
     if (rng === 1) {
