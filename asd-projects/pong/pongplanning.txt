@@ -1,0 +1,68 @@
+User Story / Gameplay
+Describe the gameplay
+
+What are the conditions when the game begins?
+    A button labled press to start (might add a 3rd player mode button)
+and the ball will be in the middle of the play area and the 2 paddles on
+there respective sides in the center.
+
+Does the game have an end? If so, what are the conditions for when it ends?
+    Yes, if the score gets above a certain value if i decide to do it but it wont 
+if i decide to make an endless mode.
+
+What ifs will there be?
+    If the ball hits the wall, if the ball hits the paddle.
+Visual Game Components:
+What are the visual game components? For example, in Bouncing Box, the game components were the board and the box.
+    Paddles, ball(s), boundries, center line.
+Which will be static? (the board)
+    The board and the scoreboard as well as the scoreboard.
+
+Which will be animated? (the box)
+    Ball, padddle, scoreboard
+What data will you need to manage each game component? For example, in Bouncing Box, the data values were positionX, speedX, and points.
+    Speed, position x and y, and each players score.
+Events / Logic
+What events will occur in this game? (timer events, keyboard events, clicking events?)
+    Key down events and key up events and maybe timer events if i get any 'spicy' ideas
+How do those events affect the data of the program?
+    Change speed and thus position of paddles or possiable speed of ball.
+For each "event", write out the high-level logic of what will happen. It is better (and tricky) to be as specific as you can while remaining high-level!
+    When ball hits lower wall:
+        *Speed Y is set to negative value (r multiplied by negative number)
+    When ball hits upper wall:
+        *Speed Y is set to positive number (or multplied by negative)
+    Gamemode buttons when clicked(maybe):
+        sets gamemode var to a specific value proabably string of the game mode ex "classic" or "endless" or "3 player"
+    When W is pressed:
+        speed Y for p1 paddle wll be set to negative
+    When S is pressed:
+        Speed Y for p1 will be set to positive
+    When W is released:
+        set speedY for p1 paddle to 0
+    When S is released:
+        Set SpeedY for p1 paddle to 0
+    When I is pressed:
+        sets p2 paddle speedY to negative
+    When I released:
+        sets p2 paddle speedY to 0
+    When K is pressed:
+        Set p2 paddle speedY to positive
+    When K is released:
+        Sets p2 paddle speedY to 0
+    When up is pressed(maybe):
+        Sets speedy of ball to negative
+    When down is presssed(also maybe):
+        Sets ball speedY to positive
+    Left is pressed(perhaps):
+        speed x for ball is set to negative
+    Right is pessed(perhaps or perhapsn'n't):
+        Speed x for ball is set to positive
+
+
+
+For example: in bouncing box, when the box is clicked:
+
+The speed is increased
+The point total goes up by 1 and is displayed on the box
+The position of the box is reset to 0
