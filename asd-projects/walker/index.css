@@ -72,3 +72,16 @@ body {
   padding-left: 10px;
   padding-right: 10px;
 }
+#freezetag {
+  width: 111px;
+  height: 20px;
+  position: absolute;
+  background-color: #24e7cd;
+  border: rgb(255, 0, 0) 1px solid;
+  box-shadow: #24e7cd 2px 2px, #24e7cd -2px 2px, #24e7cd 2px -2px, #24e7cd -2px -2px;
+  vertical-align: middle;
+  padding: 1px;
+  font-style: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+}

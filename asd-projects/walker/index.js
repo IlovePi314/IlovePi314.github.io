@@ -11,8 +11,8 @@ function runProgram() {
   $("#competitive").css("left", ($(".board").width() / 2 - 150));
   $("#classic").css("left", ($(".board").width() / 2 + 25));
   $("#classic").css("top", ($(window).height() / 2));
-
-
+  $("#freezetag").css("top", (($(window).height() / 2) + 50))
+  $("#freezetag").css("left", ($(".board").width() / 2 - 60))
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
@@ -28,13 +28,16 @@ function runProgram() {
     CreatePlayers("p4"),   
   ]
    
-
-
+//Setting Base player positions after they are created//
+  //PLAYER 1//
   players[0].x = 100;
   players[0].y = $(window).height() / 2;
   //PLAYER 2//
   players[1].x = $(".board").width() - 150;
   players[1].y = $(window).height() / 2;
+  //PLAYER 3, 4 hidden until needed//
+  $("#p3").hide();
+  $("#p4").hide();
   //object for all key presses needed for both players
   var key = {
     "DOWN": 40,
@@ -338,12 +341,24 @@ function runProgram() {
     $("#p4").hide();
     paused = false
   }
+  function freezetagSelect() {
+    mode = "freezetag"
+    $("p").hide();
+    $("#p3").show();
+    $("#p4").show();
+    $("#start").show(); 
+    /*Show start will be to show start button because 
+    game deed to stay paused to set new player positions
+    show p3 and p4 as well as setting their positions
+    and showing text to identify whos who and controls
+    for each player*/                         
+  }
   //factory function for creating players//
   function CreatePlayers(player){
     var purhaps = {};
     purhaps.name = player;
     purhaps.x = 0
-    purpahs.y = 0
+    purhaps.y = 0
     purhaps.speedX = 0;
     purhaps.speedY = 0;
     purhaps.it = false;
