@@ -19,39 +19,17 @@ function runProgram() {
   var boardWidth = $(".board").width() - 1;
   var boardHeight = $(window).height() - 16;
   //console.log(players[1].y); 
-  //Player Variables//
-  //PLAYER 1//
+  //Player Variables and creation//
+  
   var players = [
-    {//p1
-      x: 0,
-      y: 0,
-      speedX: 0,
-      speedY: 0,
-      it: false
-    },
-    {//p2
-      x: 0,
-      y: 0,
-      speedX: 0,
-      speedY: 0,
-      it: false
-    },
-    {//p3 when in right mode will be used
-      x: 0,
-      y: 0,
-      speedX: 0,
-      speedY: 0,
-      it: false
-    },
-    {//p4
-      x: 0,
-      y: 0,
-      speedX: 0,
-      speedY: 0,
-      it: false
-    }
-
+    CreatePlayers("p1"),
+    CreatePlayers("p2"),
+    CreatePlayers("p3"),
+    CreatePlayers("p4"),   
   ]
+   
+
+
   players[0].x = 100;
   players[0].y = $(window).height() / 2;
   //PLAYER 2//
@@ -158,7 +136,7 @@ function runProgram() {
           $("#whoit").css("left", ($(".board").width() / 2) - 100)
         }
         goodToTag = false;
-        setTimeout(() => { goodToTag = true; }, 2000);
+        setTimeout(() => { goodToTag = true; }, 1500);
       }
     }
     /////////////////////////////
@@ -359,6 +337,18 @@ function runProgram() {
     $("#p3").hide();
     $("#p4").hide();
     paused = false
+  }
+  //factory function for creating players//
+  function CreatePlayers(player){
+    var purhaps = {};
+    purhaps.name = player;
+    purhaps.x = 0
+    purpahs.y = 0
+    purhaps.speedX = 0;
+    purhaps.speedY = 0;
+    purhaps.it = false;
+    purhaps.frozen = false;
+  return purhaps;
   }
 
 
