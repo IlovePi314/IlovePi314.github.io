@@ -20,15 +20,15 @@ function runProgram() {
   var boardHeight = $(window).height() - 16;
   //console.log(players[1].y); 
   //Player Variables and creation//
-  
+
   var players = [
     CreatePlayers("p1"),
     CreatePlayers("p2"),
     CreatePlayers("p3"),
-    CreatePlayers("p4"),   
+    CreatePlayers("p4"),
   ]
-   
-//Setting Base player positions after they are created//
+
+  //Setting Base player positions after they are created//
   //PLAYER 1//
   players[0].x = 100;
   players[0].y = $(window).height() / 2;
@@ -38,6 +38,7 @@ function runProgram() {
   //PLAYER 3, 4 hidden until needed//
   $("#p3").hide();
   $("#p4").hide();
+  $(".multi").hide();
   //object for all key presses needed for both players
   var key = {
     "DOWN": 40,
@@ -68,7 +69,7 @@ function runProgram() {
   /////setup mode////
   $("#competitive").on("click", competitiveSelect);
   $("#classic").on("click", classicSelect);
-
+  $("#freezetag").on("click", freezetagSelect);
 
   /////////////////////////////////////////////////
   ////logic for restart and selecting who is it////
@@ -119,7 +120,10 @@ function runProgram() {
     var centerP1Y = players[0].y + (55 / 2);
     var centerP2X = players[1].x + (55 / 2);
     var centerP2Y = players[1].y + (55 / 2);
-
+    var centerP3X = players[2].x + (55 / 2);
+    var centerP3Y = players[2].y + (55 / 2);
+    var centerP4X = players[3].x + (55 / 2);
+    var centerP4Y = players[3].y + (55 / 2);
     ///////////////////////// 
     //code for classic mode//
     /////////////////////////
@@ -159,46 +163,21 @@ function runProgram() {
     ///////////////////////
     //code for freeze tag//
     ///////////////////////
-    //if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2)) && mode === "freezetag"){
 
-    //}
-    //keeps P1 within playing field//
-    if (players[0].y > boardHeight - 50) {
-      players[0].speedY = 0;
-      players[0].y -= 1;
-    }
-    if (players[0].y < 0) {
-      players[0].speedY = 0;
-      players[0].y += 1;
-    }
-    if (players[0].x > boardWidth - 50) {
-      players[0].speedX = 0;
-      players[0].x -= 1;
-    }
-    if (players[0].x < 0) {
-      players[0].speedX = 0;
-      players[0].x += 1;
-    }
-    //keeps P2 in playing field//
-    if (players[1].y > boardHeight - 50) {
-      players[1].speedY = 0;
-      players[1].y -= 1;
-    }
-    if (players[1].y < 0) {
-      players[1].speedY = 0;
-      players[1].y += 1;
-    }
-    if (players[1].x > boardWidth - 50) {
-      players[1].speedX = 0;
-      players[1].x -= 1;
-    }
-    if (players[1].x < 0) {
-      players[1].speedX = 0;
-      players[1].x += 1;
-    }
-    //calling the functions the reposition the walker as well as the css for them//
+    /*if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2)) && mode === "freezetag")
+       if player thats is it touches player that is not frozen and is not it it freezes the player that
+       is not it
+       if anyplayer that is not it touches a frozen player it unfreezes them
+       if all players are frozen except the player that is it that player wins and it restarts the 
+       game and re selects who is it
+
+    }*/
+   
+    /*calling the functions the reposition the walker as well as the css for them and keeping them all
+    in bounds*/
     repositionWalker();
     redrawWalker();
+    stayInBounds();
   }
   //}
   /////////////
@@ -208,10 +187,12 @@ function runProgram() {
   function handleKeyDown(event) {
     if (!paused) {
       if (mode === "competitive") {
-        $("#whoit").hide()
+        $("#whoit").hide();
       }
-      $("#start1").hide()
-      $("#start2").hide()
+      $("#start1").hide();
+      $("#start2").hide();
+      $(".multi").hide();
+      //player 1//
       if (event.which === key.DOWN && players[0].y < boardHeight - 56) {
         players[0].speedY = 5;
       }
@@ -224,6 +205,7 @@ function runProgram() {
       if (event.which === key.UP && players[0].y > 1) {
         players[0].speedY = -5;
       }
+      //player 2//
       if (event.which === key.S && players[1].y < boardHeight - 55) {
         players[1].speedY = 5;
       }
@@ -236,10 +218,37 @@ function runProgram() {
       if (event.which === key.W && players[1].y > 6) {
         players[1].speedY = -5;
       }
+      //player 3//
+      if (event.which === key.G && players[2].y < boardHeight - 56) {
+        players[2].speedY = 5;
+      }
+      if (event.which === key.F && players[2].x > 0) {
+        players[2].speedX = -5;
+      }
+      if (event.which === key.H && players[2].x < boardWidth - 50) {
+        players[2].speedX = 5
+      }
+      if (event.which === key.T && players[2].y > 1) {
+        players[2].speedY = -5;
+      }
+      //player 4//
+      if (event.which === key.K && players[3].y < boardHeight - 55) {
+        players[3].speedY = 5;
+      }
+      if (event.which === key.J && players[3].x > 5) {
+        players[3].speedX = -5;
+      }
+      if (event.which === key.L && players[3].x < boardWidth - 55) {
+        players[3].speedX = 5
+      }
+      if (event.which === key.I && players[3].y > 6) {
+        players[3].speedY = -5;
+      }
     }
   }
 
   function handleKeyUp(event) {
+   //player 1//
     if (event.which === key.DOWN) {
       players[0].speedY = 0;
     }
@@ -252,6 +261,7 @@ function runProgram() {
     if (event.which === key.UP) {
       players[0].speedY = -0;
     }
+    //player 2//
     if (event.which === key.S) {
       players[1].speedY = 0;
     }
@@ -263,6 +273,32 @@ function runProgram() {
     }
     if (event.which === key.W) {
       players[1].speedY = -0;
+    }
+    //player 3//
+    if (event.which === key.G) {
+      players[2].speedY = 0;
+    }
+    if (event.which === key.F) {
+      players[2].speedX = -0;
+    }
+    if (event.which === key.H) {
+      players[2].speedX = 0
+    }
+    if (event.which === key.T) {
+      players[2].speedY = -0;
+    }
+    //player 4//
+    if (event.which === key.K) {
+      players[3].speedY = 0;
+    }
+    if (event.which === key.J) {
+      players[3].speedX = -0;
+    }
+    if (event.which === key.L) {
+      players[3].speedX = 0
+    }
+    if (event.which === key.I) {
+      players[3].speedY = -0;
     }
   }
 
@@ -281,12 +317,20 @@ function runProgram() {
     players[1].x += players[1].speedX;
     players[0].y += players[0].speedY;
     players[1].y += players[1].speedY;
+    players[2].x += players[2].speedX;
+    players[3].x += players[3].speedX;
+    players[2].y += players[2].speedY;
+    players[3].y += players[3].speedY;
   }
   function redrawWalker() {
     $("#p1").css("left", players[0].x);
     $("#p1").css("top", players[0].y);
     $("#p2").css("left", players[1].x);
     $("#p2").css("top", players[1].y);
+    $("#p3").css("left", players[2].x);
+    $("#p3").css("top", players[2].y);
+    $("#p4").css("left", players[3].x);
+    $("#p4").css("top", players[3].y);
   }
 
 
@@ -330,15 +374,11 @@ function runProgram() {
   function competitiveSelect() {
     mode = "competitive"
     $("p").hide();
-    $("#p3").hide();
-    $("#p4").hide();
     paused = false
   }
   function classicSelect() {
     mode = "classic"
     $("p").hide();
-    $("#p3").hide();
-    $("#p4").hide();
     paused = false
   }
   function freezetagSelect() {
@@ -346,15 +386,76 @@ function runProgram() {
     $("p").hide();
     $("#p3").show();
     $("#p4").show();
-    $("#start").show(); 
+    $(".multi").show();
+    multiStartPositions();
+    multiStartLables();
+    multiRNG();
+    paused = false
     /*Show start will be to show start button because 
     game deed to stay paused to set new player positions
     show p3 and p4 as well as setting their positions
     and showing text to identify whos who and controls
-    for each player*/                         
+    for each player*/
   }
+  function multiRNG() {
+    var rng = Math.floor(Math.random() * 4) + 1
+    it = rng
+
+    $("#whoit").text("(☞ﾟヮﾟ)☞  Player " + it + " is it  ☜(ﾟヮﾟ☜)")
+
+    $("#whoit").css("top", ($(window).height() / 2) - 200)
+    $("#whoit").css('left', ($('.board').width() / 2) - 250)
+  }
+  function multiStartLables() {
+    $('#start1').css('left', players[0].x + 70);
+    $('#start1').css('top', players[0].y);
+    $('#start2').css('left', players[1].x - 110);
+    $("#start2").css("top", players[1].y);
+    $("#start3").css("top", players[2].y);
+    $("#start3").css("left", players[2].x + 70);
+    $("#start4").css("top", players[3].y);
+    $("#start4").css("left", players[3].x - 110);
+  }
+
+
+  function multiStartPositions() {
+    //PLAYER 1//
+    players[0].x = 100;
+    players[0].y = $(window).height() / 9;
+    //PLAYER 2//
+    players[1].x = $(".board").width() - 150;
+    players[1].y = $(window).height() / 9;
+    //PLAYER 3//
+    players[2].x = 100
+    players[2].y = $(window).height() * 0.8;
+    //PLAYER 4//
+    players[3].x = $(".board").width() - 150;
+    players[3].y = $(window).height() * 0.8;
+  }
+  //stay in bounds function//
+  function stayInBounds(){
+    for (i = 0; i <= 3; i++) {
+      if (players[i].y > boardHeight - 50) {
+        players[i].speedY = 0;
+        players[i].y -= 1;
+      }
+      if (players[i].y < 0) {
+        players[i].speedY = 0;
+        players[i].y += 1;
+      }
+      if (players[i].x > boardWidth - 50) {
+        players[i].speedX = 0;
+        players[i].x -= 1;
+      }
+      if (players[i].x < 0) {
+        players[i].speedX = 0;
+        players[i].x += 1;
+      }
+    }
+  }
+
   //factory function for creating players//
-  function CreatePlayers(player){
+  function CreatePlayers(player) {
     var purhaps = {};
     purhaps.name = player;
     purhaps.x = 0
@@ -363,7 +464,7 @@ function runProgram() {
     purhaps.speedY = 0;
     purhaps.it = false;
     purhaps.frozen = false;
-  return purhaps;
+    return purhaps;
   }
 
 
