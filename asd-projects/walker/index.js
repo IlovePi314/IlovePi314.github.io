@@ -112,6 +112,8 @@ function runProgram() {
   /* 
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
+  only need to detect and determine these player colisions
+  /1-2 1-3 1-4 2-3 2-4 3-4
   */
   //if (paused === false) {
   function newFrame() {
