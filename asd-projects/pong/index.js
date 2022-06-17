@@ -108,21 +108,21 @@ function runProgram(){
     $("#board").css("width", $(window).width() - 19);
     $("#board").css("height", $(window).height() - 20);
     $("#midline").css("height", $(window).height() - 20)
-    $("#midline").css("left", $("#board").width() / 2)
-    $("#leftpaddle").css("top", $("#board").height() / 2 - 65)
-    $("#rightpaddle").css("top", $("#board").height() / 2 - 65)
-    $("#rightpaddle").css("left", $("#board").width() - 75)
-    $("#leftpaddle").css("left", 65)
-    $("#scoreP1").css ("left", ($("#board").width() / 2) - 200)
-    $("#scoreP2").css ("left", ($("#board").width() / 2) + 150)
-    $("#ball").css("left", $("#board").width() / 2 - 7)
-    $("#ball").css("top", $("#board").height() / 2 - 7)
-    gameItems[0].x = $("#ball").css("left")
-    gameItems[0].y = $("#ball").css("top")
-    gameItems[1].x = $("#rightpaddle").css("left")
-    gameItems[1].y = $("#rightpaddle").css("top")
-    gameItems[2].x = $("#leftpaddle").css("left")
-    gameItems[2].y = $("#leftpaddle").css("top")
+    $("#midline").css("left", $("#board").width() / 2);
+    $("#leftpaddle").css("top", $("#board").height() / 2 - 65);
+    $("#rightpaddle").css("top", $("#board").height() / 2 - 65);
+    $("#rightpaddle").css("left", $("#board").width() - 75);
+    $("#leftpaddle").css("left", 65);
+    $("#scoreP1").css ("left", ($("#board").width() / 2) - 200);
+    $("#scoreP2").css ("left", ($("#board").width() / 2) + 150);
+    $("#ball").css("left", $("#board").width() / 2 - 7);
+    $("#ball").css("top", $("#board").height() / 2 - 7);
+    gameItems[0].x = parsefloat$("#ball").css("left")
+    gameItems[0].y = parsefloat$("#ball").css("top")
+    gameItems[1].x = parsefloat$("#rightpaddle").css("left")
+    gameItems[1].y = parsefloat$("#rightpaddle").css("top")
+    gameItems[2].x = parsefloat$("#leftpaddle").css("left")
+    gameItems[2].y = parsefloat$("#leftpaddle").css("top")
   }
   function CreateGameItem(item) {
     var purhaps = {};
@@ -140,8 +140,8 @@ function runProgram(){
   function moveObject(num){
     gameItems[num].x += gameItems[num].speedX
     gameItems[num].y += gameItems[num].speedY
-    $(gameItems[num].name).css("left", gameItems[id].x);
-    $(gameItems[num].name).css("top", gameItems[id].y);
+    $(gameItems[num].name).css("left", gameItems[num].x);
+    $(gameItems[num].name).css("top", gameItems[num].y);
   }
 
 
