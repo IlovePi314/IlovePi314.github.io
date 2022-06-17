@@ -20,7 +20,6 @@ function runProgram() {
   var boardHeight = $(window).height() - 16;
   //console.log(players[1].y); 
   //Player Variables and creation//
-
   var players = [
     CreatePlayers("p1"),
     CreatePlayers("p2"),
@@ -163,25 +162,65 @@ function runProgram() {
       }
     }
     ///////////////////////
-    //code for freeze tag//
+    //code for freeze tag   50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2)) //
     ///////////////////////
 
-    /*if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2)) && mode === "freezetag")
-       if player thats is it touches player that is not frozen and is not it it freezes the player that
-       is not it
-       if anyplayer that is not it touches a frozen player it unfreezes them
-       if all players are frozen except the player that is it that player wins and it restarts the 
-       game and re selects who is it
+    if (mode === "freezetag") {
+      if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2))) {
+        p1p2();
+      }
+      if (50 > Math.sqrt(Math.pow(centerP1X - centerP3X, 2) + Math.pow(centerP1Y - centerP3Y, 2))) {
+        p1p3();
+      }
+      if (50 > Math.sqrt(Math.pow(centerP1X - centerP4X, 2) + Math.pow(centerP1Y - centerP4Y, 2))) {
+        p1p4();
+      }
+      if (50 > Math.sqrt(Math.pow(centerP2X - centerP3X, 2) + Math.pow(centerP2Y - centerP3Y, 2))) {
+        p2p3();
+      }
+      if(50 > Math.sqrt(Math.pow(centerP2X - centerP4X, 2) + Math.pow(centerP2Y - centerP4Y, 2))){
+        p2p4();
+      }
+      if(50 > Math.sqrt(Math.pow(centerP3X - centerP4X, 2) + Math.pow(centerP3Y - centerP4Y, 2))){
+        p3p4();
+      }
+    }
+    
+    
+    function p3p4() {
+    if (it === 4 && players[2].frozen != true) {
+      players[2].frozen = true
+    }
+    if (it === 3 && players[3].frozen != true) {
+      players[3].frozen = true
+    }
+    if (it === 1 || it === 2 && players[2].frozen === true) {
+      players[2].frozen = false
+    }
+    if (it === 1 || it === 2 && players[3].frozen === true) {
+      players[3].frozen = false
+    }
+  } 
 
-    }*/
-   
-    /*calling the functions the reposition the walker as well as the css for them and keeping them all
-    in bounds*/
-    repositionWalker();
-    redrawWalker();
-    stayInBounds();
-  }
-  //}
+
+
+      /* 1-2\ | 1-3\ | 1-4\ | 2-3\ | 2-4\ | 3- 4 
+       if player thats is it touches player that is not frozen and is not it it freezes the player that
+        is not it
+        if anyplayer that is not it touches a frozen player it unfreezes them
+        if all players are frozen except the player that is it that player wins and it restarts the 
+        game and re selects who is it
+ 
+     }*/
+
+      /*calling the functions the reposition the walker as well as the css for them and keeping them all
+      in bounds*/
+      repositionWalker();
+      redrawWalker();
+      stayInBounds();
+    }
+  
+
   /////////////
   /* 
   Called in response to events.
@@ -195,62 +234,70 @@ function runProgram() {
       $("#start2").hide();
       $(".multi").hide();
       //player 1//
-      if (event.which === key.DOWN && players[0].y < boardHeight - 56) {
-        players[0].speedY = 5;
-      }
-      if (event.which === key.LEFT && players[0].x > 0) {
-        players[0].speedX = -5;
-      }
-      if (event.which === key.RIGHT && players[0].x < boardWidth - 50) {
-        players[0].speedX = 5
-      }
-      if (event.which === key.UP && players[0].y > 1) {
-        players[0].speedY = -5;
+      if (players[0].frozen != true) {
+        if (event.which === key.DOWN && players[0].y < boardHeight - 56) {
+          players[0].speedY = 5;
+        }
+        if (event.which === key.LEFT && players[0].x > 0) {
+          players[0].speedX = -5;
+        }
+        if (event.which === key.RIGHT && players[0].x < boardWidth - 50) {
+          players[0].speedX = 5
+        }
+        if (event.which === key.UP && players[0].y > 1) {
+          players[0].speedY = -5;
+        }
       }
       //player 2//
-      if (event.which === key.S && players[1].y < boardHeight - 55) {
-        players[1].speedY = 5;
-      }
-      if (event.which === key.A && players[1].x > 5) {
-        players[1].speedX = -5;
-      }
-      if (event.which === key.D && players[1].x < boardWidth - 55) {
-        players[1].speedX = 5
-      }
-      if (event.which === key.W && players[1].y > 6) {
-        players[1].speedY = -5;
+      if (players[1].frozen != true) {
+        if (event.which === key.S && players[1].y < boardHeight - 55) {
+          players[1].speedY = 5;
+        }
+        if (event.which === key.A && players[1].x > 5) {
+          players[1].speedX = -5;
+        }
+        if (event.which === key.D && players[1].x < boardWidth - 55) {
+          players[1].speedX = 5
+        }
+        if (event.which === key.W && players[1].y > 6) {
+          players[1].speedY = -5;
+        }
       }
       //player 3//
-      if (event.which === key.G && players[2].y < boardHeight - 56) {
-        players[2].speedY = 5;
-      }
-      if (event.which === key.F && players[2].x > 0) {
-        players[2].speedX = -5;
-      }
-      if (event.which === key.H && players[2].x < boardWidth - 50) {
-        players[2].speedX = 5
-      }
-      if (event.which === key.T && players[2].y > 1) {
-        players[2].speedY = -5;
+      if (players[2].frozen != true) {
+        if (event.which === key.G && players[2].y < boardHeight - 56) {
+          players[2].speedY = 5;
+        }
+        if (event.which === key.F && players[2].x > 0) {
+          players[2].speedX = -5;
+        }
+        if (event.which === key.H && players[2].x < boardWidth - 50) {
+          players[2].speedX = 5
+        }
+        if (event.which === key.T && players[2].y > 1) {
+          players[2].speedY = -5;
+        }
       }
       //player 4//
-      if (event.which === key.K && players[3].y < boardHeight - 55) {
-        players[3].speedY = 5;
-      }
-      if (event.which === key.J && players[3].x > 5) {
-        players[3].speedX = -5;
-      }
-      if (event.which === key.L && players[3].x < boardWidth - 55) {
-        players[3].speedX = 5
-      }
-      if (event.which === key.I && players[3].y > 6) {
-        players[3].speedY = -5;
+      if (players[3].frozen != true) {
+        if (event.which === key.K && players[3].y < boardHeight - 55) {
+          players[3].speedY = 5;
+        }
+        if (event.which === key.J && players[3].x > 5) {
+          players[3].speedX = -5;
+        }
+        if (event.which === key.L && players[3].x < boardWidth - 55) {
+          players[3].speedX = 5
+        }
+        if (event.which === key.I && players[3].y > 6) {
+          players[3].speedY = -5;
+        }
       }
     }
   }
 
   function handleKeyUp(event) {
-   //player 1//
+    //player 1//
     if (event.which === key.DOWN) {
       players[0].speedY = 0;
     }
@@ -435,7 +482,7 @@ function runProgram() {
     players[3].y = $(window).height() * 0.8;
   }
   //stay in bounds function//
-  function stayInBounds(){
+  function stayInBounds() {
     for (i = 0; i <= 3; i++) {
       if (players[i].y > boardHeight - 50) {
         players[i].speedY = 0;
@@ -456,7 +503,9 @@ function runProgram() {
     }
   }
 
-  //factory function for creating players//
+  //////////////////////////////////////////////////
+  //factory function for creating players///////////
+  //////////////////////////////////////////////////
   function CreatePlayers(player) {
     var purhaps = {};
     purhaps.name = player;
@@ -468,8 +517,80 @@ function runProgram() {
     purhaps.frozen = false;
     return purhaps;
   }
+  //player collision helper functions
+  function p1p2() {
+    if (it === 1 && players[1].frozen != true) {
+      players[1].frozen = true
+    }
+    if (it === 2 && players[0].frozen != true) {
+      players[0].frozen = true
+    }
+    if (it === 3 || it === 4 && players[0].frozen === true) {
+      players[0].frozen = false
+    }
+    if (it === 3 || it === 4 && players[1].frozen === true) {
+      players[1].frozen = false
+    }
+  }
+  function p1p3() {
+    if (it === 3 && players[0].frozen != true) {
+      players[0].frozen = true
+    }
+    if (it === 1 && players[2].frozen != true) {
+      players[2].frozen = true
+    }
+    if (it === 2 || it === 4 && players[0].frozen === true) {
+      players[0].frozen = false
+    }
+    if (it === 2 || it === 4 && players[2].frozen === true) {
+      players[2].frozen = false
+    }
+  }
+  function p1p4() {
+    if (it === 4 && players[0].frozen != true) {
+      players[0].frozen = true
+    }
+    if (it === 1 && players[3].frozen != true) {
+      players[3].frozen = true
+    }
+    if (it === 2 || it === 3 && players[0].frozen === true) {
+      players[0].frozen = false
+    }
+    if (it === 2 || it === 3 && players[3].frozen === true) {
+      players[3].frozen = false
+    }
+  }
+  function p2p3() {
+    if (it === 3 && players[1].frozen != true) {
+      players[1].frozen = true
+    }
+    if (it === 2 && players[2].frozen != true) {
+      players[2].frozen = true
+    }
+    if (it === 1 || it === 4 && players[1].frozen === true) {
+      players[1].frozen = false
+    }
+    if (it === 1 || it === 4 && players[2].frozen === true) {
+      players[2].frozen = false
+    }
+  }
+  function p2p4() {
+    if (it === 4 && players[1].frozen != true) {
+      players[1].frozen = true
+    }
+    if (it === 2 && players[3].frozen != true) {
+      players[3].frozen = true
+    }
+    if (it === 1 || it === 3 && players[1].frozen === true) {
+      players[1].frozen = false
+    }
+    if (it === 1 || it === 3 && players[3].frozen === true) {
+      players[3].frozen = false
+    }
+  } 
+
+
+
 
 
 }
-
-
