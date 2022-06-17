@@ -166,6 +166,7 @@ function runProgram() {
     ///////////////////////
 
     if (mode === "freezetag") {
+      
       if (50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2))) {
         p1p2();
       }
@@ -184,6 +185,7 @@ function runProgram() {
       if(50 > Math.sqrt(Math.pow(centerP3X - centerP4X, 2) + Math.pow(centerP3Y - centerP4Y, 2))){
         p3p4();
       }
+      stopFrozen();
      checkForVictory();
     
     }
@@ -628,7 +630,14 @@ function runProgram() {
     players[0].frozen = players[1].frozen = players[2].frozen = players[3].frozen = false
     paused = false
   }
-
+  function stopFrozen(){
+  for (i = 0; i >=3; i++){
+  if (players[i].frozen === true){
+    players[i].speedX = 0
+    players[i].speedY = 0
+    }
+   }
+  } 
 
 
 
