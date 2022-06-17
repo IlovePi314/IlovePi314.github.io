@@ -162,7 +162,7 @@ function runProgram() {
       }
     }
     ///////////////////////
-    //code for freeze tag   50 > Math.sqrt(Math.pow(centerP1X - centerP2X, 2) + Math.pow(centerP1Y - centerP2Y, 2)) //
+    //code for freeze tag//
     ///////////////////////
 
     if (mode === "freezetag") {
@@ -184,23 +184,12 @@ function runProgram() {
       if(50 > Math.sqrt(Math.pow(centerP3X - centerP4X, 2) + Math.pow(centerP3Y - centerP4Y, 2))){
         p3p4();
       }
+     checkForVictory();
+    
     }
     
     
-    function p3p4() {
-    if (it === 4 && players[2].frozen != true) {
-      players[2].frozen = true
-    }
-    if (it === 3 && players[3].frozen != true) {
-      players[3].frozen = true
-    }
-    if (it === 1 || it === 2 && players[2].frozen === true) {
-      players[2].frozen = false
-    }
-    if (it === 1 || it === 2 && players[3].frozen === true) {
-      players[3].frozen = false
-    }
-  } 
+   
 
 
 
@@ -588,6 +577,58 @@ function runProgram() {
       players[3].frozen = false
     }
   } 
+  function p3p4() {
+    if (it === 4 && players[2].frozen != true) {
+      players[2].frozen = true
+    }
+    if (it === 3 && players[3].frozen != true) {
+      players[3].frozen = true
+    }
+    if (it === 1 || it === 2 && players[2].frozen === true) {
+      players[2].frozen = false
+    }
+    if (it === 1 || it === 2 && players[3].frozen === true) {
+      players[3].frozen = false
+    }
+  } 
+  function checkForVictory(){
+    var numbers = 0;
+    for (i = 0; i <= 3; i++){
+      if (players[i].frozen === true){
+        numbers = numbers + 1
+      }
+      if (numbers >= 3){
+        numbers = 0
+        multiStartOver();
+      }
+    }
+   
+  }
+  function multiStartOver(){
+    paused = false
+    $("#whoit").show();
+    $("#whoit").css("left", ($(".board").width() / 2) - 100)
+    $("#whoit").text("Player " + it + " wins");
+    if (!paused) {
+      players[1].speedX = players[1].speedY = players[0].speedX = players[0].speedY = 0; //itterate to make less for more people
+      clearInterval(interval);
+      setTimeout(multiresume, 1000);
+      paused = true;
+      console.log("someone won")
+    }
+  }
+  function multiresume() {
+    interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
+    setTimeout(multiRestart, 1000);
+  }
+  function multiRestart(){
+    multiRNG();
+    multiStartLables();
+    multiStartPositions();
+    players[0].frozen = players[1].frozen = players[2].frozen = players[3].frozen = false
+    paused = false
+  }
+
 
 
 
