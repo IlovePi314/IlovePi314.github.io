@@ -10,8 +10,8 @@ function runProgram(){
   // Constant Variables
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  var boardWidth = $("#board").width();
-  var boardHeight = $("#board").height();
+  const boardWidth = $("#board").width();
+  const boardHeight = $("#board").height();
   var key = {
     "DOWN": 40,
     "UP": 38,
@@ -37,7 +37,10 @@ function runProgram(){
   $(document).on('keyup', handleKeyUp)                           // change 'eventType' to the type of event you want to handle
   positionstuff();
   startBall();
-
+  gameItems[0].height = 15
+  gameItems[0].width = 15
+  gameItems[1].height = $("#rightpaddle").css("height")
+  gameItems[1].width = $("#rightpaddle").css("width")
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -51,7 +54,9 @@ function runProgram(){
     moveObject(0);
     moveObject(1);
     moveObject(2);
-
+    collisionWithWall(0);
+    collisionWithWall(1);
+    collisionWithWall(2);
   }
   
   /* 
@@ -74,7 +79,7 @@ function runProgram(){
       gameItems[0].speedY *= -1
     }
     if (event.which === key.G){
-      gameItems[0].speedY *= -1
+      gameItems[0].speedX *= -1
     }
   }
   function handleKeyUp(event) {
@@ -117,12 +122,12 @@ function runProgram(){
     $("#scoreP2").css ("left", ($("#board").width() / 2) + 150);
     $("#ball").css("left", $("#board").width() / 2 - 7);
     $("#ball").css("top", $("#board").height() / 2 - 7);
-    gameItems[0].x = parsefloat$("#ball").css("left")
-    gameItems[0].y = parsefloat$("#ball").css("top")
-    gameItems[1].x = parsefloat$("#rightpaddle").css("left")
-    gameItems[1].y = parsefloat$("#rightpaddle").css("top")
-    gameItems[2].x = parsefloat$("#leftpaddle").css("left")
-    gameItems[2].y = parsefloat$("#leftpaddle").css("top")
+    gameItems[0].x = parseFloat($("#ball").css("left"))
+    gameItems[0].y = parseFloat($("#ball").css("top"))
+    gameItems[1].x = parseFloat($("#rightpaddle").css("left"))
+    gameItems[1].y = parseFloat($("#rightpaddle").css("top"))
+    gameItems[2].x = parseFloat($("#leftpaddle").css("left"))
+    gameItems[2].y = parseFloat($("#leftpaddle").css("top"))
   }
   function CreateGameItem(item) {
     var purhaps = {};
@@ -135,13 +140,23 @@ function runProgram(){
   }
   function startBall(){
     var randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    var randomNum2 = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
     gameItems[0].speedX = randomNum
+    gameItems[0].speedY = randomNum2
   }
   function moveObject(num){
     gameItems[num].x += gameItems[num].speedX
     gameItems[num].y += gameItems[num].speedY
     $(gameItems[num].name).css("left", gameItems[num].x);
     $(gameItems[num].name).css("top", gameItems[num].y);
+  }
+  function collisionWithWall(num){
+    if (gameItems[num].y + $() >= boardHeight){
+      gameItems[num].speedY *= -1
+    }
+    if (gameItems[num].y <= 0){
+      gameItems[num].speedY *= -1
+    }
   }
 
 
