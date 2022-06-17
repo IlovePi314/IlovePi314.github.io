@@ -16,4 +16,9 @@
              {"name":"runtime",
               "title":"Runtime",
               "description":"A side-scroller game featuring our own HalleBot!",
-              "date":"Tuesday, March 31, 2020"}]}
+              "date":"Tuesday, March 31, 2020"},
+
+              {"name":"tag (walker)",
+               "title": "TAG (Walker)",
+               "description":"A tag game 2 player game modes as well as a 4 player freeze tag mode.",
+               "date":"Thursday, June 16, 2022"}]}
