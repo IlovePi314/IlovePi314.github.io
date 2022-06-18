@@ -152,6 +152,7 @@ function runProgram() {
     var randomNum2 = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
     gameItems[0].speedX = randomNum
     gameItems[0].speedY = randomNum2
+    
   }
   function moveObject(num) {
     gameItems[num].x += gameItems[num].speedX
@@ -185,6 +186,8 @@ function runProgram() {
       gameItems[0].x = $("#ball").css("left")
       gameItems[0].y = $("#ball").css("top")
       startBall();
+      gameItems[0].x = $("#ball").css("left")
+      gameItems[0].y = $("#ball").css("top")
       paddlenegspeed = -5
       paddlespeed = 5
     }
@@ -198,7 +201,7 @@ function runProgram() {
     }
     if (gameItems[2].y <= 0) {
       gameItems[2].speedY = 0
-      gameItems[2].y += 13
+      gameItems[2].y += 1
     }
     if (gameItems[2].y + 130 >= boardHeight) {
       gameItems[2].speedY = 0
