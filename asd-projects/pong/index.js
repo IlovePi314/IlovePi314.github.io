@@ -9,7 +9,7 @@ function runProgram() {
 
   // Constant Variables
   const FRAME_RATE = 60;
-  const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
 
   var key = {
     "DOWN": 40,
@@ -64,7 +64,7 @@ paused = true
 
   function newFrame() {
     $("#scoreP1").text(paddlespeed)
-    $("#scoreP2").text(gameItems[0].speedY)
+    $("#scoreP2").text(gameItems[0].speedY) //custom debugger because school board is annoying and blocked inspect
     moveObject(0);
     moveObject(1);
     moveObject(2);
@@ -97,6 +97,7 @@ paused = true
     if (event.which === key.G) {
       gameItems[0].speedX *= -1
     }
+
   }
   function handleKeyUp(event) {
     if (event.which === key.W) {
@@ -147,6 +148,7 @@ paused = true
     $("#start").css("top", (($(window).height() / 2) + 50))
     $("#start").css("left", ($(window).width() / 2 - 80))
   }
+
   function CreateGameItem(item) {
     var purhaps = {};
     purhaps.name = item;
@@ -268,6 +270,8 @@ function resume() {
 function  restart(){
   gameItems[0].speedX = 0
   gameItems[0].speedY = 0
+  paddlenegspeed = -5
+  paddlespeed = 5
   startBall();
   paused = false
 }
