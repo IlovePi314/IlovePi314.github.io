@@ -183,6 +183,8 @@ paused = true
       gameItems[0].y = parseFloat($("#ball").css("top"))
       paddlenegspeed = -5
       paddlespeed = 5
+      gameItems[0].speedX = 0
+      gameItems[0].speedY = 0
       setTimeout(resume, 1500);
       paused = true;
     }
@@ -195,6 +197,8 @@ paused = true
       gameItems[0].y = parseFloat($("#ball").css("top"))
       paddlenegspeed = -5
       paddlespeed = 5
+      gameItems[0].speedX = 0
+      gameItems[0].speedY = 0
       setTimeout(resume, 1500);
       paused = true;
     }
@@ -254,6 +258,7 @@ paused = true
 function start(){
   $("#start").hide();
   startBall();
+  interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
   paused = false
 }
 function resume() {
@@ -262,6 +267,8 @@ function resume() {
 }
 function  restart(){
   startBall();
+  gameItems[0].speedX = 0
+  gameItems[0].speedY = 0
   paused = false
 }
 
