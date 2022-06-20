@@ -145,6 +145,7 @@ paused = true
     $("#start").css("top", (($(window).height() / 2) + 50))
     $("#start").css("left", ($(window).width() / 2 - 80))
   }
+  
   function CreateGameItem(item) {
     var purhaps = {};
     purhaps.name = item;
