@@ -63,6 +63,8 @@ paused = true
   */
 
   function newFrame() {
+    $("#scoreP1").text(paddlespeed)
+    $("#scoreP2").text(gameItems[0].speedY)
     moveObject(0);
     moveObject(1);
     moveObject(2);
@@ -253,7 +255,10 @@ paused = true
   }
 function start(){
   $("#start").hide();
+  gameItems[0].speedX = 0
+  gameItems[0].speedY = 0
   startBall();
+  interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
   paused = false
 }
 function resume() {
@@ -261,6 +266,8 @@ function resume() {
   setTimeout(restart, 1000);
 }
 function  restart(){
+  gameItems[0].speedX = 0
+  gameItems[0].speedY = 0
   startBall();
   paused = false
 }
