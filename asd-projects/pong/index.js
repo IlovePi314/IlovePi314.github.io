@@ -29,13 +29,16 @@ function runProgram() {
     CreateGameItem(rightpaddle), //[1]
     CreateGameItem(leftpaddle) //[2]
   ]
-
+paused = true
   // one-time setup
-  let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
+
+  if (paused === false){
+  var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
+  }
+  
   $(document).on('keydown', handleKeyDown);
   $(document).on('keyup', handleKeyUp)                           // change 'eventType' to the type of event you want to handle
   positionstuff();
-  startBall();
   gameItems[0].height = 15
   gameItems[0].width = 15
   gameItems[1].height = $("#rightpaddle").css("height")
@@ -49,6 +52,7 @@ function runProgram() {
   //must be called after things are positioned
   const boardWidth = $("#board").width();
   const boardHeight = $("#board").height();
+  $("#start").on("click", start);
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +61,7 @@ function runProgram() {
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
+
   function newFrame() {
     moveObject(0);
     moveObject(1);
@@ -137,6 +142,8 @@ function runProgram() {
     gameItems[1].y = parseFloat($("#rightpaddle").css("top"))
     gameItems[2].x = parseFloat($("#leftpaddle").css("left"))
     gameItems[2].y = parseFloat($("#leftpaddle").css("top"))
+    $("#start").css("top", (($(window).height() / 2) + 50))
+    $("#start").css("left", ($(window).width() / 2 - 80))
   }
   function CreateGameItem(item) {
     var purhaps = {};
@@ -172,24 +179,24 @@ function runProgram() {
       $("#scoreP2").text(p2score)
       $("#ball").css("left", $("#board").width() / 2 - 7);
       $("#ball").css("top", $("#board").height() / 2 - 7);
-      gameItems[0].x = $("#ball").css("left")
-      gameItems[0].y = $("#ball").css("top")
-      startBall();
+      gameItems[0].x = parseFloat($("#ball").css("left"))
+      gameItems[0].y = parseFloat($("#ball").css("top"))
       paddlenegspeed = -5
-      paddlespeed =5
+      paddlespeed = 5
+      setTimeout(resume, 1500);
+      paused = true;
     }
     if (gameItems[num].x >= boardWidth - 15) {
       p1score++
       $("#scoreP1").text(p1score)
       $("#ball").css("left", $("#board").width() / 2 - 7);
       $("#ball").css("top", $("#board").height() / 2 - 7);
-      gameItems[0].x = $("#ball").css("left")
-      gameItems[0].y = $("#ball").css("top")
-      startBall();
-      gameItems[0].x = $("#ball").css("left")
-      gameItems[0].y = $("#ball").css("top")
+      gameItems[0].x = parseFloat($("#ball").css("left"))
+      gameItems[0].y = parseFloat($("#ball").css("top"))
       paddlenegspeed = -5
       paddlespeed = 5
+      setTimeout(resume, 1500);
+      paused = true;
     }
     if (gameItems[1].y <= 0) {
       gameItems[1].speedY = 0
@@ -244,6 +251,19 @@ function runProgram() {
       paddlespeed += 1
     }
   }
+function start(){
+  $("#start").hide();
+  startBall();
+  paused = false
+}
+function resume() {
+  interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
+  setTimeout(restart, 1000);
+}
+function  restart(){
+  startBall();
+  paused = false
+}
 
 
 

@@ -63,3 +63,17 @@ body {
 /*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
 /*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
 }
+#start{
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  color: white;
+  background-color: black;
+  border: rgb(236, 236, 236) 1px solid;
+  vertical-align: middle;
+  text-align: center;
+  padding: 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-style: bold; 
+}
