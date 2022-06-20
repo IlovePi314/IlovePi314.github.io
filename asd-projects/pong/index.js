@@ -187,8 +187,12 @@ paused = true
       gameItems[0].y = parseFloat($("#ball").css("top"))
       paddlenegspeed = -5
       paddlespeed = 5
-      setTimeout(resume, 1500);
-      paused = true;
+      gameItems[0].speedX = 0
+      gameItems[0].speedy = 0
+      startBall();
+
+     // setTimeout(resume, 1500);
+     // paused = true;
     }
     if (gameItems[num].x >= boardWidth - 15) {
       p1score++
@@ -199,8 +203,11 @@ paused = true
       gameItems[0].y = parseFloat($("#ball").css("top"))
       paddlenegspeed = -5
       paddlespeed = 5
-      setTimeout(resume, 1500);
-      paused = true;
+      gameItems[0].speedX = 0
+      gameItems[0].speedY = 0
+      startBall();
+     // setTimeout(resume, 1500);
+    //  paused = true;
     }
     if (gameItems[1].y <= 0) {
       gameItems[1].speedY = 0
