@@ -63,8 +63,8 @@ paused = true
   */
 
   function newFrame() {
-    $("#scoreP1").text(paddlespeed)
-    $("#scoreP2").text(gameItems[0].speedY) //custom debugger because school board is annoying and blocked inspect
+    //$("#scoreP1").text(paddlespeed)
+    //$("#scoreP2").text(gameItems[0].speedY)             //custom debugger because school board is annoying and blocked inspect
     moveObject(0);
     moveObject(1);
     moveObject(2);
@@ -166,7 +166,7 @@ paused = true
     
   }
   function moveObject(num) {
-    gameItems[num].x += gameItems[num].speedX
+    gameItems[num].x += gameItems[num].speedX 
     gameItems[num].y += gameItems[num].speedY
     $(gameItems[num].name).css("left", gameItems[num].x);
     $(gameItems[num].name).css("top", gameItems[num].y);
