@@ -25,7 +25,7 @@
                
                {"name":"Pong",
                 "title":"Pong",
-                "description":"Classic pong with a twist",
+                "description":"Classic pong with a twist, Player 1 uses W and S Player 2 uses UP and DOWN",
                 "date":"Tuesday, June 21, 2022"
                }
                
