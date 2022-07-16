@@ -29,13 +29,13 @@ function runProgram() {
     CreateGameItem(rightpaddle), //[1]
     CreateGameItem(leftpaddle) //[2]
   ]
-paused = true
+  paused = true
   // one-time setup
 
-  if (paused === false){
-  var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
+  if (paused === false) {
+    var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   }
-  
+
   $(document).on('keydown', handleKeyDown);
   $(document).on('keyup', handleKeyUp)                           // change 'eventType' to the type of event you want to handle
   positionstuff();
@@ -98,7 +98,7 @@ paused = true
     if (event.which === key.G) {
       gameItems[0].speedX *= -1
     }
-    if (event.which === key.LEFT){
+    if (event.which === key.LEFT) {
       p1score = 11
     }
 
@@ -169,10 +169,10 @@ paused = true
     var randomNum2 = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
     gameItems[0].speedX = randomNum
     gameItems[0].speedY = randomNum2
-    
+
   }
   function moveObject(num) {
-    gameItems[num].x += gameItems[num].speedX 
+    gameItems[num].x += gameItems[num].speedX
     gameItems[num].y += gameItems[num].speedY
     $(gameItems[num].name).css("left", gameItems[num].x);
     $(gameItems[num].name).css("top", gameItems[num].y);
@@ -197,8 +197,9 @@ paused = true
       gameItems[0].speedy = 0
       startBall();
 
-     // setTimeout(resume, 1500);
-     // paused = true;
+      clearInterval(interval);
+      setTimeout(reset, 2000)
+
     }
     if (gameItems[num].x >= boardWidth - 15) {
       p1score++
@@ -212,8 +213,9 @@ paused = true
       gameItems[0].speedX = 0
       gameItems[0].speedY = 0
       startBall();
-     // setTimeout(resume, 1500);
-    //  paused = true;
+      clearInterval(interval);
+      setTimeout(reset, 2000)
+
     }
     if (gameItems[1].y <= 0) {
       gameItems[1].speedY = 0
@@ -253,7 +255,7 @@ paused = true
       square1.topY < square2.bottom && square2.name === rightpaddle) {
       square1.speedX += 1
       square1.speedX *= -1
-      square1.x -=1
+      square1.x -= 1
       paddlenegspeed -= 1
       paddlespeed += 1
     }
@@ -268,54 +270,62 @@ paused = true
       paddlespeed += 1
     }
   }
-function start(){
-  $("#start").hide();
-  gameItems[0].speedX = 0
-  gameItems[0].speedY = 0
-  startBall();
-  interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
-  paused = false
-  $("#victory").hide();
-  p1score = 0
-  p2score = 0
-  $("#p1score").empty();
-  $("#p2score").empty();
-  $("#p1score").text(p1score)
-  $("#p2score").text(p2score)
-}
+  function start() {
+    $("#start").hide();
+    gameItems[0].speedX = 0
+    gameItems[0].speedY = 0
+    startBall();
+    interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
+    paused = false
+    $("#victory").hide();
+    p1score = 0
+    p2score = 0
+    $("#p1score").empty();
+    $("#p2score").empty();
+    $("#p1score").text(p1score)
+    $("#p2score").text(p2score)
+  }
 
-function victory(){
-  if (p1score === 11){
-    $("#victory").text("Player 1 wins")
-    $("#victory").show();
+  function victory() {
+    if (p1score === 11) {
+      $("#victory").text("Player 1 wins")
+      $("#victory").show();
+      p1score = 0
+      p2score = 0
+      $("#p1score").text("0")
+      $("#p2score").text("0")
+      paused = true
+      clearInterval(interval)
+      setTimeout(restart, 2000)
+    }
+    if (p2score === 11) {
+      $("#victory").text("Player 2 wins")
+      $("#victory").show();
+      p1score = 0
+      p2score = 0
+      $("#p1score").text("0")
+      $("#p2score").text("0")
+      paused = true
+      clearInterval(interval);
+      setTimeout(restart, 2000)
+
+    }
+  }
+  function restart() {
+    $("#start").show();
+    positionstuff();
     p1score = 0
     p2score = 0
     $("#p1score").text("0")
     $("#p2score").text("0")
-    paused = true
-    clearInterval(interval)
-    setTimeout(restart, 2000)
   }
-  if (p2score === 11){
-    $("#victory").text("Player 2 wins")
-    $("#victory").show();
-    p1score = 0
-    p2score = 0
-    $("#p1score").text("0")
-    $("#p2score").text("0")
-    paused = true
-  clearInterval(interval);
-  setTimeout(restart, 2000)
-    
+
+  function reset() {
+    positionstuff();
+    startBall();
+    interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
+    paused = false
   }
-}
-function restart (){
-  $("#start").show();
- positionstuff();
- p1score = 0
- p2score = 0
- $("#p1score").text("0")
- $("#p2score").text("0")
-}
+
 
 }
