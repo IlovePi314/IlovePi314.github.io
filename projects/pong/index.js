@@ -65,6 +65,7 @@ paused = true
   function newFrame() {
     //$("#scoreP1").text(paddlespeed)
     //$("#scoreP2").text(gameItems[0].speedY)             //custom debugger because school board is annoying and blocked inspect
+    victory();
     moveObject(0);
     moveObject(1);
     moveObject(2);
@@ -96,6 +97,9 @@ paused = true
     }
     if (event.which === key.G) {
       gameItems[0].speedX *= -1
+    }
+    if (event.which === key.LEFT){
+      p1score = 11
     }
 
   }
@@ -147,6 +151,8 @@ paused = true
     gameItems[2].y = parseFloat($("#leftpaddle").css("top"))
     $("#start").css("top", (($(window).height() / 2) + 50))
     $("#start").css("left", ($(window).width() / 2 - 80))
+    $("#victory").css("top", ($(window).height() / 2) - 200)
+    $("#victory").css('left', ($(window).width() / 2) - 100)
   }
 
   function CreateGameItem(item) {
@@ -269,21 +275,47 @@ function start(){
   startBall();
   interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
   paused = false
-}
-function resume() {
-  interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
-  setTimeout(restart, 1000);
-}
-function  restart(){
-  gameItems[0].speedX = 0
-  gameItems[0].speedY = 0
-  paddlenegspeed = -5
-  paddlespeed = 5
-  startBall();
-  paused = false
+  $("#victory").hide();
+  p1score = 0
+  p2score = 0
+  $("#p1score").empty();
+  $("#p2score").empty();
+  $("#p1score").text(p1score)
+  $("#p2score").text(p2score)
 }
 
-
-
+function victory(){
+  if (p1score === 11){
+    $("#victory").text("Player 1 wins")
+    $("#victory").show();
+    p1score = 0
+    p2score = 0
+    $("#p1score").text("0")
+    $("#p2score").text("0")
+    paused = true
+    clearInterval(interval)
+    setTimeout(restart, 2000)
+  }
+  if (p2score === 11){
+    $("#victory").text("Player 2 wins")
+    $("#victory").show();
+    p1score = 0
+    p2score = 0
+    $("#p1score").text("0")
+    $("#p2score").text("0")
+    paused = true
+  clearInterval(interval);
+  setTimeout(restart, 2000)
+    
+  }
+}
+function restart (){
+  $("#start").show();
+ positionstuff();
+ p1score = 0
+ p2score = 0
+ $("#p1score").text("0")
+ $("#p2score").text("0")
+}
 
 }
