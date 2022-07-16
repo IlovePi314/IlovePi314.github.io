@@ -23,7 +23,7 @@
                "description":"A tag game with 2 player game modes along with a 4 player freeze tag mode for fun. Player 1 uses Up Down Left Right | Player 2 uses W A S D | Player 3 uses T F G H | Player 4 uses I J K L.",
                "date":"Thursday, June 16, 2022"},
                
-               {"name":"Pong",
+               {"name":"pong",
                 "title":"Pong",
                 "description":"Classic pong with a twist, Player 1 uses W and S Player 2 uses UP and DOWN",
                 "date":"Tuesday, June 21, 2022"
